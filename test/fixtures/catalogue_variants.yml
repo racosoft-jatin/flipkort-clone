@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 9.99
+  catalogue_variant_color_id: 1
+  catalogue_variant_size_id: 1
+  quantity: 1
+  catalogue_id: 1
+
+two:
+  price: 9.99
+  catalogue_variant_color_id: 1
+  catalogue_variant_size_id: 1
+  quantity: 1
+  catalogue_id: 1

@@ -1,0 +1,2 @@
+class CatalogueVariantSize < ApplicationRecord
+end

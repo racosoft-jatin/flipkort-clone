@@ -1,0 +1,2 @@
+class CatalogueVariant < ApplicationRecord
+end

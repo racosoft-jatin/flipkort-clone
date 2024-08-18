@@ -1,0 +1,2 @@
+class CatalogueVariantColor < ApplicationRecord
+end
