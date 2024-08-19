@@ -3,6 +3,9 @@ ActiveAdmin.register Catalogue do
                 :catalogue_variant_color_id, :catalogue_variant_size_id, :quantity,
                 :_destroy]
 
+  filter :name
+  filter :gender, as: :select, collection: -> { Catalogue.genders.keys }
+
   index do
     selectable_column
     id_column
@@ -17,7 +20,7 @@ ActiveAdmin.register Catalogue do
     f.inputs do
       f.input :name
       f.input :description
-      f.input :gender
+      f.input :gender, as: :select, collection: Catalogue::genders.keys.collect { |gender| [gender.capitalize, gender] }
     end
 
     f.has_many :catalogue_variants,
