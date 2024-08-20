@@ -11,6 +11,11 @@ ActiveAdmin.register CatalogueVariantColor do
   end
 
 
+  filter :name_eq, as: :select, collection: -> { CatalogueVariantColor.pluck(:name).uniq.sort }, label: 'Color Name'
+  filter :color_code_eq, as: :select, collection: -> { CatalogueVariantColor.pluck(:color_code).uniq.sort }, label: 'Color Code'
+
+
+
   form do |f|
     f.inputs do
       f.input :name
