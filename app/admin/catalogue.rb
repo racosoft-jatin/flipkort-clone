@@ -4,8 +4,7 @@ ActiveAdmin.register Catalogue do
                 :_destroy]
 
   filter :name
-  filter :gender, as: :select, collection: -> { Catalogue.genders.keys }
-
+  filter :gender_eq, as: :select, collection: Catalogue.genders.map { |key, value| [key.to_s.titleize, value] }
   index do
     selectable_column
     id_column
@@ -20,7 +19,7 @@ ActiveAdmin.register Catalogue do
     f.inputs do
       f.input :name
       f.input :description
-      f.input :gender, as: :select, collection: Catalogue::genders.keys.collect { |gender| [gender.capitalize, gender] }
+      f.input :gender, as: :select, collection: Catalogue.genders.keys.collect { |gender| [gender.capitalize, gender] }
     end
 
     f.has_many :catalogue_variants,
@@ -32,7 +31,6 @@ ActiveAdmin.register Catalogue do
       ff.input :catalogue_variant_color_id, as: :select, collection: CatalogueVariantColor.all.collect { |c| [c.name, c.id] }
       ff.input :catalogue_variant_size_id, as: :select, collection: CatalogueVariantSize.all.collect { |s| [s.name, s.id] }
       ff.input :quantity
-      #ff.input :catalogue_id
     end
 
     f.actions
@@ -44,6 +42,6 @@ ActiveAdmin.register Catalogue do
       row :description
       row :gender
       row :created_at
+    end
   end
- end
 end
