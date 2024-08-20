@@ -9,7 +9,8 @@ ActiveAdmin.register CatalogueVariantSize do
     actions
   end
 
-
+   filter :name, as: :select, collection: -> { CatalogueVariantSize.pluck(:name).uniq }, label: 'Size'
+   
   form do |f|
     f.inputs do
       f.input :name

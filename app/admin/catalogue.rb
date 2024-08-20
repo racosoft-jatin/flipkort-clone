@@ -6,7 +6,18 @@ ActiveAdmin.register Catalogue do
       ]
     ]
 
-  # Index, filters, and show configurations remain unchanged
+  filter :name
+  filter :gender, as: :select, collection: Catalogue.genders.map { |key, value| [key.to_s.titleize, value] }
+
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :description
+    column :gender
+    column :created_at
+    actions
+  end
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
