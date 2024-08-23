@@ -16,9 +16,9 @@ ActiveAdmin.register Catalogue do
     column :name
     column :description
     column :gender
-    column :category_id
-    column :subcategory_id
-    column :brand_id
+    column :category
+    column :subcategory
+    column :brand
     column :created_at
     actions
   end
@@ -29,9 +29,9 @@ ActiveAdmin.register Catalogue do
       f.input :name
       f.input :description
       f.input :gender, as: :select, collection: Catalogue.genders.keys.map { |gender| [gender.capitalize, gender] }
-      f.input :category_id, as: :select, collection: Category.all.map { |c| [c.id] }
-      f.input :subcategory_id, as: :select, collection: SubCategory.all.map { |s| [s.id] }
-      f.input :brand_id, as: :select, collection: Brand.all.map { |b| [b.id] }
+      f.input :category, as: :select, collection: Category.all.map { |c| [c.name, c.id] }
+      f.input :subcategory, as: :select, collection: SubCategory.all.map { |s| [s.name, s.id] }
+      f.input :brand, as: :select, collection: Brand.all.map { |b| [b.name, b.id] }
     end
 
     f.inputs do
@@ -57,9 +57,9 @@ ActiveAdmin.register Catalogue do
       row :gender do |catalogue|
         catalogue.gender.capitalize
       end
-      row :category_id
-      row :subcategory_id
-      row :brand_
+      row :category
+      row :subcategory
+      row :brand
       row :created_at
     end
   end
