@@ -24,13 +24,15 @@ ActiveAdmin.register Catalogue do
   end
 
   form do |f|
+    text_node javascript_include_tag Ckeditor.cdn_url
+
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
-      f.input :description
+      f.input :description, as: :ckeditor, input_html: { ckeditor: { toolbar: 'mini', height: 50, width: 500} }
       f.input :gender, as: :select, collection: Catalogue.genders.keys.map { |gender| [gender.capitalize, gender] }
-      f.input :category, as: :select, collection: Category.all.map { |c| [c.name, c.id] }
-      f.input :subcategory, as: :select, collection: SubCategory.all.map { |s| [s.name, s.id] }
+      f.input :category, as: :select, collection: Category.all.map { |c| [c.name, c.id] }, input_html: { id: 'category_select' }
+      f.input :subcategory, as: :select, collection: SubCategory.all.map { |s| [s.name, s.id] }, input_html: { id: 'subcategory_select' }
       f.input :brand, as: :select, collection: Brand.all.map { |b| [b.name, b.id] }
     end
 
