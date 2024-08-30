@@ -1,5 +1,9 @@
 ActiveAdmin.register Category do
-  permit_params :name, sub_categories_attributes: [ :id, :name, :category_id, :_destroy ]
+
+  menu parent: 'Catalogues', label: 'Category / Subcategory'
+  permit_params :name, :activated, sub_categories_attributes: [ :id, :name, :category_id, :_destroy ]
+
+  filter :name, as: :string, label: 'Search by Name'
 
   index do
     selectable_column
@@ -9,6 +13,8 @@ ActiveAdmin.register Category do
     column :created_at
     actions
   end
+
+   includes :sub_categories
 
   form do |f|
     f.inputs do

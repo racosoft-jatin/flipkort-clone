@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -9,4 +10,22 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+ resources :catalogues, only: [:create] do
+      collection do
+        get :search
+      end
+    end
+
+ resources :categories, only: [:create] do
+    collection do
+      get :search
+    end
+  end
+
+ resources :brands, only: [:create] do
+    collection do
+      get :search
+    end
+  end
 end
