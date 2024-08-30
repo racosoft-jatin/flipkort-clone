@@ -1,5 +1,5 @@
 ActiveAdmin.register Catalogue do
-  permit_params :name, :description, :gender, :category_id, :subcategory_id, :brand_id,
+  permit_params :name, :description, :gender, :category_id, :subcategory_id, :brand_id, :activated,
                 catalogue_variants_attributes: [
                   :id, :price, :catalogue_variant_color_id, :catalogue_variant_size_id, :quantity, :_destroy,
                   attachments_attributes: [
@@ -8,7 +8,17 @@ ActiveAdmin.register Catalogue do
                 ]
 
   filter :name
+  filter :category
   filter :gender, as: :select, collection: Catalogue.genders.map { |key, value| [key.to_s.titleize, value] }
+  filter :name, as: :string, label: 'Search by Name'
+  
+  # Custom action for toggling activation status
+  batch_action :toggle_activation, form: true do |ids|
+    Catalogue.where(id: ids).find_each do |catalogue|
+      catalogue.update(activated: !catalogue.activated)
+    end
+    redirect_to collection_path, alert: "Activation status updated successfully."
+  end
 
   index do
     selectable_column

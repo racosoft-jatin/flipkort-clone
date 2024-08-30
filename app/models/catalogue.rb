@@ -7,5 +7,18 @@ class Catalogue < ApplicationRecord
     enum gender: { male: 0, female: 1, unisex: 2 }
 
 	accepts_nested_attributes_for :catalogue_variants, allow_destroy: true
+
+
+	#include PgSearch::Model
+
+     # pg_search_scope :search_by_name,
+     #              against: [:name],
+     #              using: { tsearch: { prefix: true } }
+
+      searchkick
+
+      
+
+
 end
 

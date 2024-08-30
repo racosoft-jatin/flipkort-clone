@@ -1,8 +1,11 @@
 NO_IMAGE = 'No Image'
 ActiveAdmin.register Brand do
+  menu parent: 'Catalogues'
+
   permit_params :name, :image
 
-  filter :name
+  filter :name, as: :string, label: 'Search by Name'
+
 
 
   index do
@@ -16,19 +19,16 @@ ActiveAdmin.register Brand do
     actions
   end
 
-  # Define the form for creating/editing Brand
-  form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs do
+
+   form do |f|
+    f.inputs 'Brand Details' do
       f.input :name
       f.input :image, as: :file
-   
     end
-
     f.actions
   end
 
-  # Define the show page for Brand
+ 
   show do
     attributes_table do
       row :name
